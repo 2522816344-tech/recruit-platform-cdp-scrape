@@ -1,0 +1,30 @@
+# .gitattributes — 强制统一换行符（LF），避免跨平台协作时 CRLF/LF 混用
+# 也是 GitHub Actions Windows runner 默认行为引发差异的兜底
+# 详见 https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+# 默认：所有文本文件 checkout 时为 LF，提交时统一为 LF
+* text=auto eol=lf
+
+# 显式指定需要 LF（防止某些工具写入 CRLF 后被改回去）
+*.js        text eol=lf
+*.py        text eol=lf
+*.json      text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.example   text eol=lf
+*.toml      text eol=lf
+LICENSE     text eol=lf
+.gitignore  text eol=lf
+
+# 二进制：保持原样，禁止 git 改换行
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.xlsx binary
+*.xls  binary

@@ -26,6 +26,19 @@ import tempfile
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 SCRIPTS = os.path.join(ROOT, 'scripts')
 
+# ---------------------------------------------------------------------------
+# Windows 编码兜底（修复 GitHub Actions windows-latest 失败）
+#
+# 英文版 Windows 的控制台代码页是 cp1252，无法编码中文 → print() 中文会
+# 抛 UnicodeEncodeError 导致 CI 红叉。这里把标准输出统一切到 UTF-8
+# （Python 3.7+ 支持 reconfigure），errors='replace' 保证极端情况下不崩。
+# ---------------------------------------------------------------------------
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 
 def parse_salary(s: str, platform: str):
     """按平台口径归一化薪资到月薪 K（千元/月）。

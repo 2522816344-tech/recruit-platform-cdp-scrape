@@ -10,6 +10,16 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 
+# ---------------------------------------------------------------------------
+# Windows 编码兜底：英文版 Windows 控制台是 cp1252，print 中文/✓✗ 会 UnicodeEncodeError。
+# 统一切到 UTF-8 输出（Python 3.7+）；errors='replace' 保证极端情况不崩。
+# ---------------------------------------------------------------------------
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 BASE = os.environ.get('SCRAPE_DIR') or os.getcwd()
 DATA = os.environ.get('SCRAPE_DATA') or os.path.join(BASE, 'data')
 CONFIG = os.environ.get('SCRAPE_CONFIG') or os.path.join(BASE, 'config.json')

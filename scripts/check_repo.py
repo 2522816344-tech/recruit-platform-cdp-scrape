@@ -24,6 +24,16 @@ import re
 import sys
 from pathlib import Path
 
+# ---------------------------------------------------------------------------
+# Windows 编码兜底：英文版 Windows 控制台是 cp1252，print 中文/✓✗ 会 UnicodeEncodeError。
+# 统一切到 UTF-8 输出（Python 3.7+）；errors='replace' 保证极端情况不崩。
+# ---------------------------------------------------------------------------
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
 ROOT = Path(__file__).resolve().parent.parent
 
 # 必备文件

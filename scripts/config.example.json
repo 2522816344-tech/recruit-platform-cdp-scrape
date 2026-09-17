@@ -1,0 +1,30 @@
+{
+  "_doc": "把本文件复制到工作目录并改名为 config.json。所有键都可省略，省略即用内置默认值（见 scripts/paths.js 的 DEFAULTS）。",
+  "_doc_city": "下面是「示例城市」（北京），请务必改成你自己的城市；各平台城市码互不通用。",
+
+  "title": "招聘岗位调研汇总",
+  "userName": "你的用户名（用于登录态判定；在已登录浏览器中可保持空）",
+
+  "localCityRe": "北京|海淀|朝阳|东城|西城|丰台|石景山|通州|昌平|大兴|顺义|房山|门头沟|平谷|密云|怀柔|延庆",
+  "localLabel": "本地",
+  "localSheetName": "本地岗位",
+  "localCityParam": {
+    "zhilian": "530",
+    "boss": "101010100"
+  },
+
+  "platforms": ["liepin", "job51", "zhilian"],
+  "nJobsPerCompany": 4,
+
+  "pace": {
+    "liepin": [8000, 13000],
+    "job51": [2500, 4000],
+    "zhilian": [3000, 5000],
+    "boss": [3000, 5500]
+  },
+
+  "rejectTarget": {
+    "_doc": "人工复核后需要剔除的同名不同司候选，例如：",
+    "示例公司A": ["竞品甲", "竞品乙"]
+  }
+}

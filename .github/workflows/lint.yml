@@ -1,0 +1,55 @@
+name: lint
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  lint:
+    name: Syntax check (Node 22 / Python 3.8+)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.x]
+        python-version: ['3.8', '3.10', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Node syntax check
+        run: |
+          for f in scripts/*.js; do
+            node -c "$f" || { echo "✗ $f"; exit 1; }
+            echo "✓ $f"
+          done
+
+      - name: Python syntax check
+        run: |
+          for f in scripts/*.py tests/*.py; do
+            [ -f "$f" ] || continue
+            python -m py_compile "$f" || { echo "✗ $f"; exit 1; }
+            echo "✓ $f"
+          done
+
+      - name: Privacy scan
+        run: |
+          # 泛化检测（不针对特定用户名）：任何真实用户路径都不允许进仓库
+          if grep -rnE 'Users[/\\][^/\\ ]+' scripts/ tests/ docs/ SKILL.md README.md *.md 2>/dev/null \
+               | grep -v 'check_repo\.py'; then
+            echo '✗ hardcoded user path detected'; exit 1
+          fi
+          echo '✓ no hardcoded user paths found'
+
+      - name: check_repo.py
+        run: python scripts/check_repo.py

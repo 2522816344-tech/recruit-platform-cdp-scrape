@@ -1,0 +1,51 @@
+{
+  "name": "recruit-platform-cdp-scrape",
+  "version": "0.2.0",
+  "description": "复用用户已登录的 Chrome 会话（CDP），从猎聘/前程无忧/智联/BOSS直聘批量抓取公司岗位数据并汇总成 Excel。仅个人使用。",
+  "license": "MIT",
+  "private": false,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "test": "node tests/test_paths.js && node tests/test_common.js",
+    "test:python": "python tests/test_xlsx.py",
+    "check": "python scripts/check_repo.py",
+    "lint": "node -c scripts/cdp.js && node -c scripts/cdpx.js && node -c scripts/chrome.js && node -c scripts/common.js && node -c scripts/paths.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/recruit-platform-cdp-scrape.git"
+  },
+  "keywords": [
+    "recruit",
+    "scraping",
+    "cdp",
+    "chrome",
+    "liepin",
+    "job51",
+    "zhilian",
+    "boss-zhipin",
+    "excel",
+    "openpyxl",
+    "personal-use",
+    "no-commercial"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "recruit-platform-cdp-scrape contributors",
+  "files": [
+    "scripts/",
+    "examples/",
+    "docs/",
+    "tests/",
+    "SKILL.md",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "SECURITY.md"
+  ]
+}

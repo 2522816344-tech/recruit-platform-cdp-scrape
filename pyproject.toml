@@ -1,0 +1,30 @@
+[project]
+name = "recruit-platform-cdp-scrape"
+version = "0.2.0"
+description = "复用用户已登录的 Chrome 会话（CDP），从招聘平台批量抓取公司岗位并汇总成 Excel。仅个人使用。"
+license = { text = "MIT" }
+authors = [{ name = "recruit-platform-cdp-scrape contributors" }]
+requires-python = ">=3.8"
+
+dependencies = [
+    "openpyxl>=3.1.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourname/recruit-platform-cdp-scrape"
+Issues = "https://github.com/yourname/recruit-platform-cdp-scrape/issues"
+
+[tool.setuptools]
+packages = []
+
+# 这个项目的 Python 端只负责出 Excel，不需要打包成 wheel。
+# 主要依赖是 Node 22 内置能力（cdp.js 等）和 openpyxl（build_xlsx.py）。
+#
+# 安装：
+#   pip install -r requirements.txt
+# 或者：
+#   pip install openpyxl>=3.1.0
+#
+# 依赖解释：
+#   - openpyxl ≥3.1 是出表脚本（build_xlsx.py）唯一需要的依赖
+#   - 不引入 pandas / numpy / requests 等，保持轻量

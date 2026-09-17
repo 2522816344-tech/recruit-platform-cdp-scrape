@@ -1,0 +1,70 @@
+# ============================================
+# recruit-platform-cdp-scrape — .gitignore
+# 个人使用工具，务必把数据 / profile / 凭证排除
+# ============================================
+
+# --- 数据与产物 ---
+data/
+*.jsonl
+*.xlsx
+output/
+*.csv
+*.tsv
+
+# --- Chrome 抓取专用 profile（含登录态 Cookie）---
+chrome-profile/
+chrome_data/
+chrome-user-data/
+
+# --- 截图与日志 ---
+*.log
+*.jpg
+*.jpeg
+*.png
+logs/
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+.pytest_cache/
+.mypy_cache/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- 环境变量（不要提交真实配置） ---
+.env
+.env.local
+.env.*.local
+
+# --- 打包产物（pack_for_share.js 的输出，不要提交） ---
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# --- 个人配置（只提交 *.example.json） ---
+config.json
+companies.json
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- 备份与临时文件 ---
+*.bak
+*.tmp
+*.swp
+*~
+*.orig
